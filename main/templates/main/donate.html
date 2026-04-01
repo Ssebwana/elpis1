@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="container">
+        <h1>Donate</h1>
+        <p>Your support helps ELPIS expand programs and reach more lives with hope and care.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-grid">
+        <div>
+            <h2>Why Your Support Matters</h2>
+            <p>
+                Donations help ELPIS deliver programs in education, outreach,
+                empowerment, and welfare support. Every contribution strengthens
+                our ability to serve communities in meaningful ways.
+            </p>
+            <p>
+                Whether small or large, your donation becomes part of a bigger mission
+                of hope, dignity, and transformation.
+            </p>
+        </div>
+
+        <div class="donation-card">
+            <h3>Suggested Support Levels</h3>
+            <div class="donation-options">
+                <button class="donation-btn">UGX 10,000</button>
+                <button class="donation-btn">UGX 25,000</button>
+                <button class="donation-btn">UGX 50,000</button>
+                <button class="donation-btn">UGX 100,000</button>
+            </div>
+            <a href="{% url 'contact' %}" class="btn btn-primary full-width-btn">Proceed to Support</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
