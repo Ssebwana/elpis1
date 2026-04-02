@@ -11,30 +11,25 @@
 <section class="section">
     <div class="container">
         <div class="card-grid">
-            <div class="card">
-                <h3>Education Support</h3>
-                <p>Providing educational resources, mentorship, and support opportunities for learners.</p>
-            </div>
-            <div class="card">
-                <h3>Community Outreach</h3>
-                <p>Addressing community needs through direct engagement and social support activities.</p>
-            </div>
-            <div class="card">
-                <h3>Youth Empowerment</h3>
-                <p>Helping young people grow through skills training, leadership, and encouragement.</p>
-            </div>
-            <div class="card">
-                <h3>Family Support</h3>
-                <p>Strengthening homes and communities through care-centered interventions.</p>
-            </div>
-            <div class="card">
-                <h3>Health and Well-being</h3>
-                <p>Supporting awareness, outreach, and basic community-centered health initiatives.</p>
-            </div>
-            <div class="card">
-                <h3>Skills Development</h3>
-                <p>Equipping individuals with practical knowledge and opportunities for self-reliance.</p>
-            </div>
+            {% for program in programs %}
+                <div class="card">
+                    {% if program.image %}
+                        <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
+                    {% endif %}
+
+                    <h3>{{ program.title }}</h3>
+                    <p>{{ program.short_description }}</p>
+
+                    {% if program.category %}
+                        <p><strong>Category:</strong> {{ program.category }}</p>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <div class="card">
+                    <h3>No Programs Available</h3>
+                    <p>Please add programs through the Django admin panel.</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>

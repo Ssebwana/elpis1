@@ -14,8 +14,7 @@
             <h2>Why Partner With ELPIS?</h2>
             <p>
                 ELPIS values partnerships that are built on shared purpose, transparency,
-                and commitment to community impact. We work with organizations, businesses,
-                institutions, and individuals who want to contribute to sustainable development.
+                and commitment to community impact.
             </p>
             <p>
                 Through partnership, we can combine resources, skills, and networks to
@@ -23,43 +22,25 @@
             </p>
         </div>
 
-        <div class="partnership-box">
-            <h3>Partnership Areas</h3>
-            <ul>
-                <li>Corporate sponsorships</li>
-                <li>Program co-development</li>
-                <li>Community campaigns</li>
-                <li>Training and capacity building</li>
-                <li>Resource and logistics support</li>
-                <li>Long-term strategic collaboration</li>
-            </ul>
-        </div>
-    </div>
-</section>
+        <div class="form-card">
+            <h3>Partnership Inquiry</h3>
 
-<section class="section light-section">
-    <div class="container">
-        <div class="section-heading">
-            <h2>How Partnership Works</h2>
-        </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color: green; margin-bottom: 15px;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
 
-        <div class="stats-grid">
-            <div class="stat-box">
-                <h3>1</h3>
-                <p>Expression of Interest</p>
-            </div>
-            <div class="stat-box">
-                <h3>2</h3>
-                <p>Consultation Meeting</p>
-            </div>
-            <div class="stat-box">
-                <h3>3</h3>
-                <p>Shared Planning</p>
-            </div>
-            <div class="stat-box">
-                <h3>4</h3>
-                <p>Implementation</p>
-            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">{{ form.organization_name }}</div>
+                <div class="form-group">{{ form.contact_person }}</div>
+                <div class="form-group">{{ form.email }}</div>
+                <div class="form-group">{{ form.phone }}</div>
+                <div class="form-group">{{ form.partnership_type }}</div>
+                <div class="form-group">{{ form.message }}</div>
+                <button type="submit" class="btn btn-primary full-width-btn">Submit Inquiry</button>
+            </form>
         </div>
     </div>
 </section>

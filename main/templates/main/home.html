@@ -59,25 +59,20 @@
         </div>
 
         <div class="card-grid">
-            <div class="card">
-                <h3>Education Support</h3>
-                <p>Helping learners access resources, mentorship, and opportunities for growth.</p>
-            </div>
-
-            <div class="card">
-                <h3>Community Outreach</h3>
-                <p>Engaging directly with communities to address pressing social needs.</p>
-            </div>
-
-            <div class="card">
-                <h3>Youth Empowerment</h3>
-                <p>Equipping young people with skills, guidance, and hope for the future.</p>
-            </div>
-
-            <div class="card">
-                <h3>Family Support</h3>
-                <p>Providing care initiatives that strengthen families and social well-being.</p>
-            </div>
+            {% for program in programs %}
+                <div class="card">
+                    {% if program.image %}
+                        <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
+                    {% endif %}
+                    <h3>{{ program.title }}</h3>
+                    <p>{{ program.short_description }}</p>
+                </div>
+            {% empty %}
+                <div class="card">
+                    <h3>No Programs Yet</h3>
+                    <p>Programs will appear here once added from the admin panel.</p>
+                </div>
+            {% endfor %}
         </div>
 
         <div class="section-center">
@@ -85,7 +80,6 @@
         </div>
     </div>
 </section>
-
 <section class="section partnerships">
     <div class="container section-grid">
         <div>
