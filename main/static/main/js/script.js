@@ -1,28 +1,23 @@
-const menuToggle = document.getElementById("menuToggle");
-const navMenu = document.getElementById("navMenu");
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
 
-if (menuToggle && navMenu) {
-    menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("show");
-    });
-}
-const menuToggle = document.getElementById("menuToggle");
-const navMenu = document.getElementById("navMenu");
-
-if (menuToggle && navMenu) {
-    menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("show");
-    });
-}
-
-const faqItems = document.querySelectorAll(".faq-item");
-
-faqItems.forEach((item) => {
-    const question = item.querySelector(".faq-question");
-
-    if (question) {
-        question.addEventListener("click", () => {
-            item.classList.toggle("active");
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", function () {
+            navMenu.classList.toggle("show");
         });
     }
+
+   document.addEventListener("DOMContentLoaded", function () {
+    const faqQuestions = document.querySelectorAll(".faq-question");
+
+    faqQuestions.forEach(function (question) {
+        question.addEventListener("click", function () {
+            const faqItem = this.closest(".faq-item");
+            if (faqItem) {
+                faqItem.classList.toggle("active");
+            }
+        });
+    });
+});
 });

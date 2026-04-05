@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="container">
+        <h1>Impact Stories and Testominies</h1>
+        <p>Read inspiring stories of impact, transformation, and community engagement through ELPIS.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="card-grid">
+            {% for story in stories %}
+                <div class="card">
+                    {% if story.photo %}
+                        <img src="{{ story.photo.url }}" alt="{{ story.title }}" class="program-image">
+                    {% endif %}
+                    <h3>{{ story.title }}</h3>
+                    <p><strong>{{ story.name }}</strong> — {{ story.story_type|title }}</p>
+                    <p>{{ story.short_quote }}</p>
+                    <a href="{% url 'story_detail' story.pk %}" class="btn btn-secondary">Read Story</a>
+                </div>
+            {% empty %}
+                <div class="card">
+                    <h3>No Stories Yet</h3>
+                    <p>Stories will appear here once added through the admin panel.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -216,7 +216,7 @@
         </div>
     </div>
 </section>
-<section class="section light-section">
+<section class="section faq-section">
     <div class="container">
         <div class="section-heading">
             <h2>Frequently Asked Questions</h2>
@@ -226,8 +226,8 @@
         <div class="faq-list">
             {% for faq in faqs %}
                 <div class="faq-item">
-                    <button class="faq-question">
-                        {{ faq.question }}
+                    <button class="faq-question" type="button" onclick="toggleFaq(this)">
+                        <span class="faq-question-text">{{ faq.question }}</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
@@ -236,8 +236,8 @@
                 </div>
             {% empty %}
                 <div class="faq-item">
-                    <button class="faq-question">
-                        No FAQs added yet
+                    <button class="faq-question" type="button" onclick="toggleFaq(this)">
+                        <span class="faq-question-text">No FAQs added yet</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
@@ -249,4 +249,12 @@
     </div>
 </section>
 
+<script>
+    function toggleFaq(button) {
+        const item = button.closest('.faq-item');
+        if (item) {
+            item.classList.toggle('active');
+        }
+    }
+</script>
 {% endblock %}

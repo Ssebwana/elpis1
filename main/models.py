@@ -106,3 +106,53 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+
+class SuccessStory(models.Model):
+    STORY_TYPE_CHOICES = [
+        ('beneficiary', 'Beneficiary Story'),
+        ('volunteer', 'Volunteer Story'),
+        ('partner', 'Partner Story'),
+        ('supporter', 'Supporter Story'),
+        ('community', 'Community Story'),
+    ]
+
+    name = models.CharField(max_length=150)
+    title = models.CharField(max_length=200)
+    story_type = models.CharField(max_length=30, choices=STORY_TYPE_CHOICES, default='beneficiary')
+    short_quote = models.CharField(max_length=255)
+    full_story = models.TextField()
+    photo = models.ImageField(upload_to='stories/photos/', blank=True, null=True)
+    video = models.FileField(upload_to='stories/videos/', blank=True, null=True)
+    is_featured = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+class GalleryItem(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='gallery/')
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+class TeamMember(models.Model):
+    ROLE_GROUP_CHOICES = [
+        ('leadership', 'Leadership'),
+        ('staff', 'Staff'),
+        ('board', 'Board Member'),
+        ('volunteer', 'Volunteer Coordinator'),
+    ]
+
+    full_name = models.CharField(max_length=150)
+    role_title = models.CharField(max_length=150)
+    role_group = models.CharField(max_length=30, choices=ROLE_GROUP_CHOICES, default='leadership')
+    bio = models.TextField(blank=True, null=True)
+    photo = models.ImageField(upload_to='team/', blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    is_featured = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.full_name

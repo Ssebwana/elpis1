@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="container">
+        <h1>{{ story.title }}</h1>
+        <p>{{ story.name }} — {{ story.story_type|title }}</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-grid">
+        <div>
+            {% if story.photo %}
+                <img src="{{ story.photo.url }}" alt="{{ story.title }}" class="program-image">
+            {% endif %}
+
+            {% if story.video %}
+                <video controls width="100%" style="margin-top: 20px; border-radius: 12px;">
+                    <source src="{{ story.video.url }}">
+                    Your browser does not support the video tag.
+                </video>
+            {% endif %}
+        </div>
+
+        <div class="program-detail-text">
+            <h2>{{ story.title }}</h2>
+            <p><strong>{{ story.name }}</strong></p>
+            <p><strong>Type:</strong> {{ story.story_type|title }}</p>
+            <p><em>“{{ story.short_quote }}”</em></p>
+            <p>{{ story.full_story }}</p>
+            <a href="{% url 'stories_list' %}" class="btn btn-outline">Back to Stories</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -2,13 +2,16 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Program
 from .forms import ContactMessageForm, PartnershipInquiryForm, VolunteerApplicationForm, DonationForm
-from .models import Program, PartnershipInquiry, VolunteerApplication, Donation, Partner, NewsPost, FAQ
+from .models import Program, PartnershipInquiry, VolunteerApplication, Donation, Partner, NewsPost, FAQ, SuccessStory, GalleryItem, TeamMember
+
 
 def home(request):
     programs = Program.objects.all()[:4]
     partners = Partner.objects.all()[:8]
     latest_news = NewsPost.objects.order_by('-created_at')[:3]
     faqs = FAQ.objects.order_by('-created_at')[:6]
+    gallery_items = GalleryItem.objects.order_by('-created_at')[:6]
+
 
     total_programs = Program.objects.count()
     total_volunteers = VolunteerApplication.objects.count()
@@ -20,6 +23,7 @@ def home(request):
         'partners': partners,
         'latest_news': latest_news,
         'faqs': faqs,
+        'gallery_items': gallery_items,
         'total_programs': total_programs,
         'total_volunteers': total_volunteers,
         'total_partnerships': total_partnerships,
@@ -29,7 +33,8 @@ def home(request):
     return render(request, 'main/home.html', context)
 
 def about(request):
-    return render(request, 'main/about.html')
+    team_members = TeamMember.objects.filter(is_featured=True).order_by('role_group', '-created_at')
+    return render(request, 'main/about.html', {'team_members': team_members})
 
 
 def programs(request):
@@ -100,3 +105,16 @@ def news_list(request):
 def news_detail(request, slug):
     news_post = get_object_or_404(NewsPost, slug=slug)
     return render(request, 'main/news_detail.html', {'news_post': news_post})
+
+def stories_list(request):
+    stories = SuccessStory.objects.order_by('-created_at')
+    return render(request, 'main/stories_list.html', {'stories': stories})
+
+
+def story_detail(request, pk):
+    story = get_object_or_404(SuccessStory, pk=pk)
+    return render(request, 'main/story_detail.html', {'story': story})
+
+def gallery(request):
+    gallery_items = GalleryItem.objects.order_by('-created_at')
+    return render(request, 'main/gallery.html', {'gallery_items': gallery_items})

@@ -4,7 +4,7 @@
 <section class="page-banner">
     <div class="container">
         <h1>About ELPIS</h1>
-        <p>Learn more about our story, mission, vision, and commitment to community transformation.</p>
+        <p>Learn more about our story, mission, vision, and the people behind our work.</p>
     </div>
 </section>
 
@@ -36,6 +36,44 @@
                 <h3>Our Values</h3>
                 <p>Integrity, compassion, accountability, collaboration, and sustainable impact.</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="section light-section">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Leadership & Team</h2>
+            <p>Meet the people behind ELPIS and the work they do to support communities.</p>
+        </div>
+
+        <div class="team-grid">
+            {% for member in team_members %}
+                <div class="team-card">
+                    {% if member.photo %}
+                        <img src="{{ member.photo.url }}" alt="{{ member.full_name }}" class="team-photo">
+                    {% else %}
+                        <div class="team-avatar">{{ member.full_name|slice:":1" }}</div>
+                    {% endif %}
+
+                    <h3>{{ member.full_name }}</h3>
+                    <p class="team-role">{{ member.role_title }}</p>
+                    <p class="team-group">{{ member.role_group|title }}</p>
+
+                    {% if member.bio %}
+                        <p class="team-bio">{{ member.bio }}</p>
+                    {% endif %}
+
+                    {% if member.email %}
+                        <p class="team-email">{{ member.email }}</p>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <div class="team-card">
+                    <h3>No Team Members Yet</h3>
+                    <p>Team profiles will appear here once added from the admin panel.</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>
