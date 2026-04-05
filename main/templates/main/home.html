@@ -66,6 +66,7 @@
                     {% endif %}
                     <h3>{{ program.title }}</h3>
                     <p>{{ program.short_description }}</p>
+                    <a href="{% url 'program_detail' program.slug %}" class="btn btn-secondary">Read More</a>
                 </div>
             {% empty %}
                 <div class="card">
@@ -114,30 +115,136 @@
         <a href="{% url 'donate' %}" class="btn btn-primary">Donate Today</a>
     </div>
 </section>
-
+<section class="section light-section">
+    <div class="container donate-box" style="background:#ffffff; color:#1f2937; border: 2px solid #0D47A1;">
+        <h2 style="color:#0D47A1;">Become a Volunteer</h2>
+        <p style="color:#444;">
+            Share your time, skills, and passion with ELPIS to help build stronger communities.
+        </p>
+        <a href="{% url 'volunteer' %}" class="btn btn-secondary">Join as Volunteer</a>
+    </div>
+</section>
 <section class="section impact">
     <div class="container">
         <div class="section-heading">
             <h2>Our Impact</h2>
+            <p>Live figures from our growing ELPIS community and engagement.</p>
         </div>
 
         <div class="stats-grid">
             <div class="stat-box">
-                <h3>500+</h3>
-                <p>People Reached</p>
+                <h3>{{ total_programs }}+</h3>
+                <p>Programs Created</p>
             </div>
             <div class="stat-box">
-                <h3>20+</h3>
-                <p>Programs Supported</p>
+                <h3>{{ total_volunteers }}+</h3>
+                <p>Volunteer Applications</p>
             </div>
             <div class="stat-box">
-                <h3>10+</h3>
-                <p>Partners Engaged</p>
+                <h3>{{ total_partnerships }}+</h3>
+                <p>Partnership Inquiries</p>
             </div>
             <div class="stat-box">
-                <h3>50+</h3>
-                <p>Volunteers Mobilized</p>
+                <h3>{{ total_donations }}+</h3>
+                <p>Donation Submissions</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="section light-section">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Trusted Partners & Supporters</h2>
+            <p>Organizations and supporters helping ELPIS expand its impact.</p>
+        </div>
+
+        <div class="partners-grid">
+            {% for partner in partners %}
+                <div class="partner-card">
+                    {% if partner.website %}
+                        <a href="{{ partner.website }}" target="_blank">
+                            {% if partner.logo %}
+                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo">
+                            {% else %}
+                                <span class="partner-name">{{ partner.name }}</span>
+                            {% endif %}
+                        </a>
+                    {% else %}
+                        {% if partner.logo %}
+                            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo">
+                        {% else %}
+                            <span class="partner-name">{{ partner.name }}</span>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% empty %}
+                <div class="partner-card">
+                    <span class="partner-name">No partners added yet</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Latest News & Updates</h2>
+            <p>Recent stories, announcements, and updates from ELPIS.</p>
+        </div>
+
+        <div class="card-grid">
+            {% for post in latest_news %}
+                <div class="card">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="program-image">
+                    {% endif %}
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.summary }}</p>
+                    <a href="{% url 'news_detail' post.slug %}" class="btn btn-secondary">Read More</a>
+                </div>
+            {% empty %}
+                <div class="card">
+                    <h3>No News Yet</h3>
+                    <p>News and updates will appear here once added from the admin panel.</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="section-center">
+            <a href="{% url 'news_list' %}" class="btn btn-primary">View All Updates</a>
+        </div>
+    </div>
+</section>
+<section class="section light-section">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Frequently Asked Questions</h2>
+            <p>Quick answers to common questions about ELPIS, partnerships, volunteering, and donations.</p>
+        </div>
+
+        <div class="faq-list">
+            {% for faq in faqs %}
+                <div class="faq-item">
+                    <button class="faq-question">
+                        {{ faq.question }}
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>{{ faq.answer }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="faq-item">
+                    <button class="faq-question">
+                        No FAQs added yet
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>FAQ content will appear here once added from the admin panel.</p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>

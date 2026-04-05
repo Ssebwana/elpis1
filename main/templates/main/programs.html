@@ -23,6 +23,8 @@
                     {% if program.category %}
                         <p><strong>Category:</strong> {{ program.category }}</p>
                     {% endif %}
+
+                    <a href="{% url 'program_detail' program.slug %}" class="btn btn-secondary">Read More</a>
                 </div>
             {% empty %}
                 <div class="card">

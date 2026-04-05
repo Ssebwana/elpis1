@@ -24,13 +24,6 @@
 
         <div class="form-card">
             <h3>Partnership Inquiry</h3>
-
-            {% if messages %}
-                {% for message in messages %}
-                    <p style="color: green; margin-bottom: 15px;">{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-
             <form method="POST">
                 {% csrf_token %}
                 <div class="form-group">{{ form.organization_name }}</div>

@@ -12,7 +12,10 @@
     <header class="header">
         <div class="container nav-container">
             <div class="logo">
-                <a href="{% url 'home' %}">ELPIS</a>
+                <a href="{% url 'home' %}" class="logo-link">
+                    <img src="{% static 'main/images/logo-elpis.jpeg' %}" alt="ELPIS Logo" class="logo-img">
+                    <span class="logo-text">ELPIS</span>
+                </a>
             </div>
 
             <nav class="nav" id="navMenu">
@@ -20,17 +23,24 @@
                 <a href="{% url 'about' %}">About</a>
                 <a href="{% url 'programs' %}">Programs</a>
                 <a href="{% url 'partnerships' %}">Partnerships</a>
+                <a href="{% url 'news_list' %}">News</a>
+                <a href="{% url 'volunteer' %}">Volunteer</a>
                 <a href="{% url 'donate' %}">Donate</a>
                 <a href="{% url 'contact' %}">Contact</a>
             </nav>
-
-            <div class="nav-actions">
-                <a href="{% url 'donate' %}" class="btn btn-primary">Donate Now</a>
-                <button class="menu-toggle" id="menuToggle">☰</button>
-            </div>
         </div>
     </header>
-
+    {% if messages %}
+    <section class="messages-wrapper">
+        <div class="container">
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
     <main>
         {% block content %}
         {% endblock %}
@@ -61,6 +71,7 @@
                 <ul>
                     <li><a href="{% url 'donate' %}">Donate</a></li>
                     <li><a href="{% url 'partnerships' %}">Partner With Us</a></li>
+                    <li><a href="{% url 'volunteer' %}">Volunteer</a></li>
                     <li><a href="{% url 'contact' %}">Contact Us</a></li>
                 </ul>
             </div>

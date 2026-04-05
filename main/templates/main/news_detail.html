@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="container">
+        <h1>{{ news_post.title }}</h1>
+        <p>Latest update from ELPIS.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-grid">
+        <div>
+            {% if news_post.image %}
+                <img src="{{ news_post.image.url }}" alt="{{ news_post.title }}" class="program-image">
+            {% endif %}
+        </div>
+
+        <div class="program-detail-text">
+            <h2>{{ news_post.title }}</h2>
+            <p>{{ news_post.content|default:news_post.summary }}</p>
+            <a href="{% url 'news_list' %}" class="btn btn-outline">Back to News</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
