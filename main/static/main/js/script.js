@@ -8,16 +8,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-   document.addEventListener("DOMContentLoaded", function () {
-    const faqQuestions = document.querySelectorAll(".faq-question");
+    const slides = document.querySelectorAll(".hero-slide");
+    let currentSlide = 0;
 
-    faqQuestions.forEach(function (question) {
-        question.addEventListener("click", function () {
-            const faqItem = this.closest(".faq-item");
-            if (faqItem) {
-                faqItem.classList.toggle("active");
-            }
-        });
-    });
-});
+    if (slides.length > 1) {
+        setInterval(function () {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add("active");
+        }, 9000);
+    }
 });

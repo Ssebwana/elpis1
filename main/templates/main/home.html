@@ -2,18 +2,44 @@
 
 {% block content %}
 
-<section class="hero">
+<section class="hero" id="heroSection">
+    <div class="hero-overlay"></div>
+
+    {% if hero_images %}
+        <div class="hero-slides" id="heroSlides">
+            {% for hero_image in hero_images %}
+                <div
+                    class="hero-slide {% if forloop.first %}active{% endif %}"
+                    style="background-image: url('{{ hero_image.image.url }}');">
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="container hero-content">
         <div class="hero-text">
-            <h1>Building Hope, Strengthening Communities</h1>
-            <p>
-                ELPIS is committed to creating lasting impact through community
-                programs, partnerships, and support from generous donors.
-            </p>
-            <div class="hero-buttons">
-                <a href="{% url 'partnerships' %}" class="btn btn-primary">Become a Partner</a>
-                <a href="{% url 'programs' %}" class="btn btn-secondary">Explore Programs</a>
-            </div>
+            {% if hero_content %}
+                <h1>{{ hero_content.heading }}</h1>
+                <p>{{ hero_content.subheading }}</p>
+                <div class="hero-buttons">
+                    <a href="{{ hero_content.primary_button_link }}" class="btn btn-primary">
+                        {{ hero_content.primary_button_text }}
+                    </a>
+                    <a href="{{ hero_content.secondary_button_link }}" class="btn btn-secondary">
+                        {{ hero_content.secondary_button_text }}
+                    </a>
+                </div>
+            {% else %}
+                <h1>Building Hope, Strengthening Communities</h1>
+                <p>
+                    ELPIS is committed to creating lasting impact through community
+                    programs, partnerships, and support from generous donors.
+                </p>
+                <div class="hero-buttons">
+                    <a href="{% url 'partnerships' %}" class="btn btn-primary">Become a Partner</a>
+                    <a href="{% url 'programs' %}" class="btn btn-secondary">Explore Programs</a>
+                </div>
+            {% endif %}
         </div>
 
         <div class="hero-image">
@@ -25,31 +51,21 @@
     </div>
 </section>
 
-<section class="section about">
-    <div class="container section-grid">
-        <div>
-            <h2>About ELPIS</h2>
-            <p>
-                ELPIS is an organization focused on empowering communities through
-                meaningful programs, strong partnerships, and compassionate support.
-                We aim to build sustainable solutions that improve lives and create
-                opportunities for growth.
-            </p>
-            <a href="{% url 'about' %}" class="btn btn-outline">Read More</a>
-        </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll("#heroSlides .hero-slide");
+        let currentSlide = 0;
 
-        <div class="info-boxes">
-            <div class="info-box">
-                <h3>Mission</h3>
-                <p>To serve communities through impactful programs and collaboration.</p>
-            </div>
-            <div class="info-box">
-                <h3>Vision</h3>
-                <p>A hopeful and empowered society where every person can thrive.</p>
-            </div>
-        </div>
-    </div>
-</section>
+        if (slides.length > 1) {
+            setInterval(function () {
+                slides[currentSlide].classList.remove("active");
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add("active");
+            }, 4000);
+        }
+    });
+</script>
+        
 
 <section class="section programs">
     <div class="container">
