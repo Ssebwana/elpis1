@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Program
 from .forms import ContactMessageForm, PartnershipInquiryForm, VolunteerApplicationForm, DonationForm
-from .models import Program, PartnershipInquiry, VolunteerApplication, Donation, Partner, NewsPost, FAQ, SuccessStory, GalleryItem, TeamMember
+from .models import Program, PartnershipInquiry, VolunteerApplication, Donation, Partner, NewsPost, FAQ, SuccessStory, GalleryItem, TeamMember, AboutPageContent, HeroSection, HeroImage
 
 
 def home(request):
@@ -11,6 +11,9 @@ def home(request):
     latest_news = NewsPost.objects.order_by('-created_at')[:3]
     faqs = FAQ.objects.order_by('-created_at')[:6]
     gallery_items = GalleryItem.objects.order_by('-created_at')[:6]
+    hero_content = HeroSection.objects.first()
+    hero_images = HeroImage.objects.order_by('-created_at')
+
 
 
     total_programs = Program.objects.count()
@@ -23,6 +26,8 @@ def home(request):
         'partners': partners,
         'latest_news': latest_news,
         'faqs': faqs,
+        'hero_section': hero_content,
+        'hero_images': hero_images,
         'gallery_items': gallery_items,
         'total_programs': total_programs,
         'total_volunteers': total_volunteers,
@@ -34,8 +39,14 @@ def home(request):
 
 def about(request):
     team_members = TeamMember.objects.filter(is_featured=True).order_by('role_group', '-created_at')
-    return render(request, 'main/about.html', {'team_members': team_members})
+    about_content = AboutPageContent.objects.first()
 
+    context = {
+        'team_members': team_members,
+        'about_content': about_content,
+    }
+
+    return render(request, 'main/about.html', context)
 
 def programs(request):
     all_programs = Program.objects.all()

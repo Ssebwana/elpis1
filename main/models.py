@@ -156,3 +156,34 @@ class TeamMember(models.Model):
 
     def __str__(self):
         return self.full_name
+    
+class AboutPageContent(models.Model):
+    organization_story = models.TextField()
+    mission = models.TextField()
+    vision = models.TextField()
+    values = models.TextField(help_text="You can write values as one paragraph or short sentences.")
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "About Page Content"
+    
+class HeroSection(models.Model):
+    heading = models.CharField(max_length=255)
+    subheading = models.TextField()
+    primary_button_text = models.CharField(max_length=100, default="Become a Partner")
+    primary_button_link = models.CharField(max_length=255, default="/partnerships/")
+    secondary_button_text = models.CharField(max_length=100, default="Explore Programs")
+    secondary_button_link = models.CharField(max_length=255, default="/programs/")
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "Homepage Hero Section"
+
+
+class HeroImage(models.Model):
+    title = models.CharField(max_length=150, blank=True, null=True)
+    image = models.ImageField(upload_to='hero/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title or f"Hero Image {self.id}"

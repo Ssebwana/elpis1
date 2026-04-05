@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Program, ContactMessage, PartnershipInquiry, VolunteerApplication, Donation, Partner, NewsPost, FAQ, SuccessStory, GalleryItem, TeamMember
+from .models import Program, ContactMessage, PartnershipInquiry, VolunteerApplication, Donation, Partner, NewsPost, FAQ, SuccessStory, GalleryItem, TeamMember, AboutPageContent, HeroSection, HeroImage
 
 
 @admin.register(ContactMessage)
@@ -62,3 +62,17 @@ class TeamMemberAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'role_title', 'role_group', 'is_featured', 'created_at')
     search_fields = ('full_name', 'role_title', 'role_group')
     list_filter = ('role_group', 'is_featured')
+    
+@admin.register(AboutPageContent)
+class AboutPageContentAdmin(admin.ModelAdmin):
+    list_display = ('updated_at',)
+
+@admin.register(HeroSection)
+class HeroSectionAdmin(admin.ModelAdmin):
+    list_display = ('heading', 'updated_at')
+
+
+@admin.register(HeroImage)
+class HeroImageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_at')
+    
