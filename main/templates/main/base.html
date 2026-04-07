@@ -10,7 +10,6 @@
 <body>
 
     <header class="header">
-        <button class="menu-toggle" id="menuToggle">☰</button>
         <div class="container nav-container">
             <div class="logo">
                 <a href="{% url 'index' %}" class="logo-link">
@@ -31,6 +30,9 @@
                 <a href="{% url 'stories_list' %}">Stories</a>
                 <a href="{% url 'gallery' %}">Gallery</a>
             </nav>
+            <div class="nav-actions">
+                <button class="menu-toggle" id="menuToggle" type="button">☰</button>
+            </div>
         </div>
     </header>
     {% if messages %}
