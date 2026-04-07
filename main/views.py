@@ -5,7 +5,7 @@ from .forms import ContactMessageForm, PartnershipInquiryForm, VolunteerApplicat
 from .models import Program, PartnershipInquiry, VolunteerApplication, Donation, Partner, NewsPost, FAQ, SuccessStory, GalleryItem, TeamMember, AboutPageContent, HeroSection, HeroImage
 
 
-def home(request):
+def index(request):
     programs = Program.objects.all()[:4]
     partners = Partner.objects.all()[:8]
     latest_news = NewsPost.objects.order_by('-created_at')[:3]
@@ -35,7 +35,7 @@ def home(request):
         'total_donations': total_donations,
     }
 
-    return render(request, 'main/home.html', context)
+    return render(request, 'main/index.html', context)
 
 def about(request):
     team_members = TeamMember.objects.filter(is_featured=True).order_by('role_group', '-created_at')
